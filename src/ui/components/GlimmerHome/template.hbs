@@ -1,1 +1,17 @@
-<div><h1>Welcome to Glimmer!</h1></div>
+<div>
+  <h1>Welcome to Glimmer Home!</h1>
+
+  <div>
+    <ul>
+      {{#each state.rooms key="@index" as |room|}}
+        <li onclick={{action showRoom room}}>{{room.name}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{#if hasRoomSelected}}
+    <RoomDetails @room={{state.selected}} />
+  {{else}}
+    <p>Click on a room to select it</p>
+  {{/if}}
+</div>

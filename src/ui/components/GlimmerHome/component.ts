@@ -2,7 +2,7 @@ import Component, { tracked } from '@glimmer/component';
 
 export default class GlimmerHome extends Component {
   @tracked state = {
-    selected: null,
+    current: 0,
     rooms: [
       { name: 'Chambre Adam', length: 422, width: 345, height: 250 },
       { name: 'Chambre Parents', length: 432, width: 345, height: 250 },
@@ -14,17 +14,18 @@ export default class GlimmerHome extends Component {
 
   @tracked('state')
   get hasRoomSelected() {
-    return this.state.selected !== null;
+    return this.state.current != null;
   }
 
-  showRoom(room) {
-    console.log(room.name)
+  @tracked('state')
+  get selectedRoom() {
+    return this.state.rooms[this.state.current];
+  }
 
+  selectRoom(index) {
     this.state = {
       ...this.state,
-      selected: room
+      current: index
     }
-
-    console.log(this.state)
   }
 }

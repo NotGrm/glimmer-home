@@ -1,27 +1,23 @@
-<div>
-  <h2>Room details</h2>
-  <section>
-    <h3>Properties</h3>
+<div
+  onclick={{@onselect}}
+  onmouseenter={{action updateHovered true}}
+  onmouseleave={{action updateHovered false}}>
+  <h3>
+    {{@room.name}}
+    {{#if @selected}}
+      <small>- selected</small>
+    {{/if}}
+  </h3>
+  {{#if state.hovered}}
     <p>
-      <strong>Name</strong>: {{@room.name}}
+      <span>Area: {{area}}</span>
+      <span>Volume: {{volume}}</span>
     </p>
+  {{else}}
     <p>
-      <strong>Length</strong>: {{@room.length}} cm
+      <span>Length: {{@room.length}}</span>
+      <span>Width: {{@room.width}}</span>
+      <span>Height: {{@room.height}}</span>
     </p>
-    <p>
-      <strong>Width</strong>: {{@room.width}} cm
-    </p>
-    <p>
-      <strong>Height</strong>: {{@room.height}} cm
-    </p>
-  </section>
-  <section>
-    <h3>Computed</h3>
-    <p>
-      <strong>Area</strong>: {{area}} cm<sup>2</sup>
-    </p>
-    <p>
-      <strong>Volume</strong>: {{volume}} cm<sup>2</sup>
-    </p>
-  </section>
+  {{/if}}
 </div>

@@ -1,17 +1,32 @@
-<div>
+<div class="container">
   <h1>Welcome to Glimmer Home!</h1>
 
-  <div>
-    <ul>
-      {{#each state.rooms key="@index" as |room|}}
-        <li onclick={{action showRoom room}}>{{room.name}}</li>
+  <div class="row">
+    <aside class="col">
+      {{#each state.rooms key="@index" as |room index|}}
+        <RoomDetails
+          @room={{room}}
+          @selected={{eq state.current index}}
+          @onselect={{action selectRoom index}} />
       {{/each}}
-    </ul>
+    </aside>
+
+    <main class="col">
+      {{#if hasRoomSelected}}
+        <FloorTools
+          @roomLength={{selectedRoom.length}}
+          @roomWidth={{selectedRoom.width}} />
+      {{else}}
+        <p>Click on a room to select it</p>
+        <p>And then you will be able to start using our floor tools</p>
+      {{/if}}
+    </main>
+
   </div>
 
-  {{#if hasRoomSelected}}
+  {{!-- {{#if hasRoomSelected}}
     <RoomDetails @room={{state.selected}} />
   {{else}}
     <p>Click on a room to select it</p>
-  {{/if}}
+  {{/if}} --}}
 </div>
